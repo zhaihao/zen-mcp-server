@@ -30,12 +30,13 @@ slog.info("setup mcp server...")
 http_app = mcp.http_app()
 
 if __name__ == '__main__':
-    #
-    # token = key_pair.create_token(
-    #     subject='console-mcp-dev',
-    #     issuer=issuer,
-    #     audience=audience,
-    #     scopes=["read", "write"]
-    # )
-    # slog.info(f'token:\n{token}')
-    uvicorn.run("main:http_app", reload=False,host='0.0.0.0', port=3000)
+    # #
+    # # token = key_pair.create_token(
+    # #     subject='console-mcp-dev',
+    # #     issuer=issuer,
+    # #     audience=audience,
+    # #     scopes=["read", "write"]
+    # # )
+    # # slog.info(f'token:\n{token}')
+    # uvicorn.run("main:http_app", reload=False,host='0.0.0.0', port=3000)
+    mcp.run(transport='http', host='0.0.0.0', port=3000)
