@@ -1,0 +1,1 @@
+GET http://localhost:8000/looking-glass/sdn/city/delay?from_city=CHI&to_city=BKK
