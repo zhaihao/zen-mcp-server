@@ -33,7 +33,7 @@ if __name__ == '__main__':
         "mock_main:app",
         host="localhost",
         port=8000,
-        reload=True,
+        reload=False,
         log_config={
             "version": 1,
             "disable_existing_loggers": False,

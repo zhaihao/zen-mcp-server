@@ -38,4 +38,4 @@ if __name__ == '__main__':
     #     scopes=["read", "write"]
     # )
     # slog.info(f'token:\n{token}')
-    uvicorn.run("main:http_app", reload=False, port=3000)
+    uvicorn.run("main:http_app", reload=False,host='0.0.0.0', port=3000)
