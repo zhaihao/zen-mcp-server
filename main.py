@@ -39,4 +39,4 @@ if __name__ == '__main__':
     # # )
     # # slog.info(f'token:\n{token}')
     # uvicorn.run("main:http_app", reload=False,host='0.0.0.0', port=3000)
-    mcp.run(transport='http', host='0.0.0.0', port=3000)
+    mcp.run(transport='sse', host='0.0.0.0', port=3000)
