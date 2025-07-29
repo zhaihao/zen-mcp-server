@@ -3,8 +3,8 @@ import logging
 from rich.logging import RichHandler
 
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(message)s",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     datefmt="[%X]",
     handlers=[RichHandler(rich_tracebacks=True, tracebacks_show_locals=True)]
 )

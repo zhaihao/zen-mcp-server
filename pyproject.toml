@@ -10,4 +10,5 @@ dependencies = [
     "orjson>=3.11.0",
     "pytest",
     "rich",
+    "uvicorn[standard]>=0.30.0",
 ]
