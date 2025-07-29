@@ -19,4 +19,4 @@ slog.info("setup mcp server...")
 
 if __name__ == '__main__':
     slog.info("Starting MCP server with detailed logging...")
-    mcp.run(transport='http', host='0.0.0.0', port=3000, log_level="debug")
+    mcp.run(transport='http', host='0.0.0.0', port=3100, log_level="debug")
