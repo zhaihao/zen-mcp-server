@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, List
 
 from fastmcp import FastMCP
 import httpx
@@ -51,7 +51,6 @@ def get_city_delay(
         ToolError: When service unavailable or invalid city codes
     """
     try:
-
         url = f"http://localhost:8000/looking-glass/city/delay?from_city={from_city}&to_city={to_city}"
 
         response = httpx.get(url)
@@ -78,6 +77,79 @@ def get_city_delay(
 
     except httpx.RequestError as e:
         raise ToolError(f"Connection error: Could not reach latency service. Details: {str(e)}")
+
+    except ValidationError as e:
+        raise ToolError(f"Invalid response format. Details: {str(e)}")
+
+    except Exception as e:
+        raise ToolError(f"Unexpected error occurred: {str(e)}")
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+class EyeballCoverageResult(BaseModel):
+    """
+    Eyeball coverage information for a specific location.
+
+    Attributes:
+        city_code (str): City IATA code (e.g., "HKG", "NYC", "LON")
+        eye_city_name (str): Name of the eyeball city
+        eye_country_name (str): Country name where the eyeball is located
+        org_name (str): Organization name providing the eyeball service
+        asn (str): Autonomous System Number
+    """
+    city_code: str
+    eye_city_name: str
+    eye_country_name: str
+    org_name: str
+    asn: str
+
+
+@lg_mcp.tool()
+def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
+    """Query eyeball coverage information for network infrastructure in a specific city
+    
+    Retrieves detailed information about eyeball networks (end-user access points) 
+    available in the specified city, including ISP organizations, ASN numbers, and 
+    geographic coverage details. Useful for understanding network connectivity options 
+    and infrastructure availability in different locations.
+    
+    Args:
+        city (str): City IATA code (e.g., "HKG", "NYC", "LON")
+        
+    Returns:
+        List[EyeballCoverageResult]: List of eyeball coverage results containing:
+            - city_code: The queried city IATA code
+            - eye_city_name: Name of the city where eyeball infrastructure is located
+            - eye_country_name: Country of the eyeball infrastructure
+            - org_name: ISP or organization providing the eyeball service
+            - asn: Autonomous System Number for the network
+        
+    Raises:
+        ToolError: When service unavailable or invalid city code
+    """
+    try:
+        url = f"http://localhost:8000/looking-glass/eyeball/coverage?city={city}"
+
+        response = httpx.get(url)
+        response.raise_for_status()
+        res_json = response.json()
+        slog.info(f"[eyeball coverage] result for {city}: {res_json}")
+
+        results = [EyeballCoverageResult(**item) for item in res_json]
+        return results
+
+    except httpx.HTTPStatusError as e:
+        code = e.response.status_code
+        if code == 404:
+            raise ToolError(f"No eyeball coverage data found for city '{city}'.")
+        elif code == 400:
+            raise ToolError(f"Invalid request. Please verify city code '{city}'.")
+        else:
+            raise ToolError(f"HTTP error {code}: Failed to query eyeball coverage for '{city}'.")
+
+    except httpx.RequestError as e:
+        raise ToolError(f"Connection error: Could not reach eyeball coverage service. Details: {str(e)}")
 
     except ValidationError as e:
         raise ToolError(f"Invalid response format. Details: {str(e)}")

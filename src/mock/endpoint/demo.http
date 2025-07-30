@@ -1,5 +1,6 @@
-GET http://localhost:8000/looking-glass/sdn/city/delay?from_city=SIN&to_city=HKG
+###
+GET http://localhost:8000/looking-glass/city/delay?from_city=HKG&to_city=LAX
 
 
 ###
-GET http://localhost:8000/looking-glass/public/city/delay?from_city=HKG&to_city=LAX
+GET http://localhost:8000/looking-glass/eyeball/coverage?city=LAX
