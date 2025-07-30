@@ -83,10 +83,10 @@ def get_city_delay(
     """
     try:
         endpoint = (
-            "looking-glass/sdn/city/delay" if network_type == "private_line"
+            "sdn/city/delay" if network_type == "private_line"
             else "public/city/delay"
         )
-        url = f"http://localhost:8000/{endpoint}?from_city={from_city}&to_city={to_city}"
+        url = f"http://localhost:8000/looking-glass/{endpoint}?from_city={from_city}&to_city={to_city}"
 
         response = httpx.get(url)
         response.raise_for_status()
