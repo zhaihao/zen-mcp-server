@@ -35,37 +35,51 @@ def get_city_delay(
         to_city: str,
         network_type: Literal['private_line', 'public_network']
 ) -> CityDelayModel:
-    """
-    Query the network latency between two cities over a specified network type.
+    """Query network latency between two cities via different network types
 
-    This tool retrieves real-time or estimated latency data between two IATA metropolitan area codes.
-    Users can choose between:
-    - 'private_line': High-performance dedicated backbone
-    - 'public_network': General public internet routing
+    Retrieves real-time network delay information between specified city pairs
+    through either dedicated private lines or public internet infrastructure.
+    This tool supports network performance monitoring, routing optimization,
+    and connectivity planning for both enterprise and public network scenarios.
 
-    The tool is commonly used for:
-    - Network performance analysis
-    - Routing optimization
-    - Private backbone feasibility assessment
+    Our Looking Glass service provides comprehensive latency measurements across
+    our premium private backbone with full-mesh connectivity, as well as public
+    internet paths. Use this data to make informed decisions about Private
+    Connect (L2) and Cloud Router (L3) network deployments.
 
     Args:
-        from_city (str): Source city code (IATA metropolitan format), e.g., "HKG", "TYO", "NYC"
-        to_city (str): Destination city code (IATA metropolitan format), e.g., "LAX", "LON", "SIN"
-        network_type (Literal): Type of network path to evaluate. Options:
-            - 'private_line'
-            - 'public_network'
+        from_city (str): Source city using IATA metropolitan area code.
+            Examples: "HKG" (Hong Kong), "NYC" (New York), "TYO" (Tokyo),
+            "LON" (London), "SIN" (Singapore), "LAX" (Los Angeles)
+        to_city (str): Destination city using IATA metropolitan area code.
+            Examples: "MOW" (Moscow), "FRA" (Frankfurt), "SYD" (Sydney),
+            "DXB" (Dubai), "SAO" (São Paulo), "JNB" (Johannesburg)
+        network_type (Literal['private_line', 'public_network']): Network infrastructure type:
+            - 'private_line': Dedicated fiber connections with guaranteed bandwidth
+              and low latency through our premium backbone network
+            - 'public_network': Standard internet routing through public infrastructure
+              with variable performance depending on ISP and routing conditions
 
     Returns:
-        CityDelayModel: Structured result including source/destination city, selected network type, and measured delay.
+        CityDelayModel: Comprehensive latency measurement result containing:
+            - from_city: Source city code (echoed from input)
+            - to_city: Destination city code (echoed from input)
+            - delay: Measured network latency (format varies by backend)
+            - network_type: Network infrastructure type used for measurement
 
     Raises:
-        ToolError: Raised when request fails, response format is invalid, or data is unavailable.
-
-    Notes:
-        - If any required fields (e.g., from_city, to_city, network_type) are missing,
-          the MCP should prompt the user to provide them before proceeding.
-        - City codes must follow IATA metropolitan format (e.g., HKG, LAX, NYC).
-        - Delay is typically represented in milliseconds (e.g., "120ms").
+        ToolError: Comprehensive error handling for various failure scenarios:
+            - Route not found: No network path exists between specified cities
+            - Invalid request: Malformed city codes or unsupported combinations
+            - Connection error: Unable to reach the Looking Glass API service
+            - Data format error: API returned unexpected or invalid response format
+            - Service error: Backend service returned HTTP error status
+    Note:
+        - City codes must follow standard IATA metropolitan area codes
+        - Private line measurements reflect dedicated infrastructure performance
+        - Public network measurements may vary based on internet routing conditions
+        - Latency values are real-time measurements and subject to network fluctuations
+        - Some city pairs may only be available on specific network types
     """
     try:
         endpoint = (
