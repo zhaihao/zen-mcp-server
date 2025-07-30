@@ -52,7 +52,7 @@ def get_city_delay(
     """
     try:
 
-        url = f"http://localhost:8000/looking-glass/city/delay/?from_city={from_city}&to_city={to_city}"
+        url = f"http://localhost:8000/looking-glass/city/delay?from_city={from_city}&to_city={to_city}"
 
         response = httpx.get(url)
         response.raise_for_status()
