@@ -36,22 +36,36 @@ def get_city_delay(
         network_type: Literal['private_line', 'public_network']
 ) -> CityDelayModel:
     """
-    Query network latency between two cities over a specified network type.
+    Query the network latency between two cities over a specified network type.
 
-    This function retrieves latency data via the Looking Glass API. Supports querying over:
-    - private_line: Premium dedicated lines with optimized routing
-    - public_network: Standard public internet routes
+    This tool retrieves real-time or estimated latency data between two IATA metropolitan area codes.
+    Users can choose between:
+    - 'private_line': High-performance dedicated backbone
+    - 'public_network': General public internet routing
+
+    The tool is commonly used for:
+    - Network performance analysis
+    - Routing optimization
+    - Private backbone feasibility assessment
 
     Args:
-        from_city (str): Source city code (IATA metropolitan code), e.g., "HKG", "NYC"
-        to_city (str): Destination city code (IATA metropolitan code), e.g., "LAX", "LON"
-        network_type (Literal): 'private_line' or 'public_network'
+        from_city (str): Source city code (IATA metropolitan format), e.g., "HKG", "TYO", "NYC"
+        to_city (str): Destination city code (IATA metropolitan format), e.g., "LAX", "LON", "SIN"
+        network_type (Literal): Type of network path to evaluate. Options:
+            - 'private_line'
+            - 'public_network'
 
     Returns:
-        CityDelayModel: Result containing source/destination city, network type, and measured latency
+        CityDelayModel: Structured result including source/destination city, selected network type, and measured delay.
 
     Raises:
-        ToolError: If request fails, response is invalid, or data is missing
+        ToolError: Raised when request fails, response format is invalid, or data is unavailable.
+
+    Notes:
+        - If any required fields (e.g., from_city, to_city, network_type) are missing,
+          the MCP should prompt the user to provide them before proceeding.
+        - City codes must follow IATA metropolitan format (e.g., HKG, LAX, NYC).
+        - Delay is typically represented in milliseconds (e.g., "120ms").
     """
     try:
         endpoint = (

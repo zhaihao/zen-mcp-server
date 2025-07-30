@@ -1,1 +1,5 @@
-GET http://localhost:8000/looking-glass/sdn/city/delay?from_city=CHI&to_city=BKK
+GET http://localhost:8000/looking-glass/sdn/city/delay?from_city=SIN&to_city=HKG
+
+
+###
+GET http://localhost:8000/looking-glass/public/city/delay?from_city=SIN&to_city=HKG
