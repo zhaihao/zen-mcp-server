@@ -113,8 +113,7 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
     
     Retrieves detailed information about eyeball networks (end-user access points) 
     available in the specified city, including ISP organizations, ASN numbers, and 
-    geographic coverage details. Results should be displayed in table format for 
-    better readability.
+    geographic coverage details.
     
     Args:
         city (str): City IATA code (e.g., "HKG", "NYC", "LON")
@@ -129,7 +128,7 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
             - delay: Network latency in milliseconds
         
     Note:
-        Results are best presented in tabular format for easy comparison.
+        Results should be displayed in table format for better readability.
         
     Raises:
         ToolError: When service unavailable or invalid city code
