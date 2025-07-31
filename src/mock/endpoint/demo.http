@@ -4,3 +4,8 @@ GET http://localhost:8000/looking-glass/city/delay?from_city=HKG&to_city=LAX
 
 ###
 GET http://localhost:8000/looking-glass/eyeball/coverage?city=LAX
+
+
+
+###
+GET http://localhost:8000/looking-glass/zga/test?city=LAX

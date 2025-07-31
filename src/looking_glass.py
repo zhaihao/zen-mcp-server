@@ -162,3 +162,77 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
 
     except Exception as e:
         raise ToolError(f"Unexpected error occurred: {str(e)}")
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+class ZGATestResult(BaseModel):
+    """
+    ZGA network test result comparing latency between public internet and ZGA acceleration.
+
+    Attributes:
+        via_public_internet_delay (str): Latency via public internet (e.g., '120ms') or 'no data provide' if unavailable
+        via_zga_delay (str): Latency via ZGA acceleration network (e.g., '80ms') or 'no data provide' if unavailable
+        target (str): Target node city code or node name (e.g., 'HKG', 'NYC', 'LON')
+        improvement_percentage (str): ZGA improvement percentage (e.g., '85%')
+    """
+    via_public_internet_delay: str
+    via_zga_delay: str
+    target: str
+    improvement_percentage: str
+
+
+@lg_mcp.tool()
+def execute_zga_test(city: str) -> list[ZGATestResult]:
+    """Test network latency from specified city to global major nodes, comparing public internet vs ZGA acceleration
+    
+    Executes network latency tests simultaneously through both public internet and 
+    Zenlayer's ZGA (Zero-distance Global Acceleration) program to test connectivity 
+    performance from user's city to major global network nodes, helping evaluate 
+    network acceleration effectiveness.
+    
+    Args:
+        city (str): Source city IATA code (e.g., "HKG", "NYC", "LON")
+        
+    Returns:
+        list[ZGATestResult]: List of test results, each containing:
+            - via_public_internet_delay: Public internet latency (e.g., '120ms') or 'no data provide'
+            - via_zga_delay: ZGA acceleration network latency (e.g., '80ms') or 'no data provide'
+            - target: Target node city code or name
+            - improvement_percentage: ZGA improvement percentage (e.g., '85%')
+            
+    Note:
+        Results should be displayed in table format for better comparison of public vs ZGA performance.
+        Delay values maintain original ms unit format.
+        
+    Raises:
+        ToolError: When service unavailable or invalid city code
+    """
+    try:
+        url = f"http://localhost:8000/looking-glass/zga/test?city={city}"
+
+        response = httpx.get(url)
+        response.raise_for_status()
+        res_json = response.json()
+        slog.info(f"[zga test] result for {city}: {res_json}")
+
+        results = [ZGATestResult(**item) for item in res_json]
+        return results
+
+    except httpx.HTTPStatusError as e:
+        code = e.response.status_code
+        if code == 404:
+            raise ToolError(f"Route not found.")
+        elif code == 400:
+            raise ToolError(f"Invalid request.")
+        else:
+            raise ToolError(f"HTTP error {code}: Failed to query latency.")
+
+    except httpx.RequestError as e:
+        raise ToolError(f"Connection error: Could not reach latency service. Details: {str(e)}")
+
+    except ValidationError as e:
+        raise ToolError(f"Invalid response format. Details: {str(e)}")
+
+    except Exception as e:
+        raise ToolError(f"Unexpected error occurred: {str(e)}")

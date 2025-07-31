@@ -1,0 +1,42 @@
+[
+  {
+    "via_public_internet_delay": 2581,
+    "via_zga_delay": 574,
+    "target": "Frankfurt"
+  },
+  {
+    "via_public_internet_delay": 6863,
+    "via_zga_delay": 1320,
+    "target": "Mumbai"
+  },
+  {
+    "via_public_internet_delay": 2801,
+    "via_zga_delay": 597,
+    "target": "San Jose"
+  },
+  {
+    "via_public_internet_delay": 3931,
+    "via_zga_delay": 458,
+    "target": "Singapore"
+  },
+  {
+    "via_public_internet_delay": 10023,
+    "via_zga_delay": 447,
+    "target": "Tokyo"
+  },
+  {
+    "via_public_internet_delay": 4012,
+    "via_zga_delay": 581,
+    "target": "Ho Chi Minh"
+  },
+  {
+    "via_public_internet_delay": 3643,
+    "via_zga_delay": 2641,
+    "target": "Jakarta"
+  },
+  {
+    "via_public_internet_delay": 1548,
+    "via_zga_delay": 528,
+    "target": "Los Angeles"
+  }
+]
