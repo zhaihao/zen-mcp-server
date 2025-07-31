@@ -13,6 +13,7 @@ class DataModel(BaseModel):
     eye_country_name: str
     org_name: str
     asn: str
+    delay: float
 
 
 data: list[DataModel] = [DataModel(**item) for item in

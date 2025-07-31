@@ -103,6 +103,7 @@ class EyeballCoverageResult(BaseModel):
     eye_country_name: str
     org_name: str
     asn: str
+    delay: float
 
 
 @lg_mcp.tool()
