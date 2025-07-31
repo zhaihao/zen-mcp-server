@@ -92,13 +92,13 @@ class EyeballCoverageResult(BaseModel):
     Eyeball coverage information for a specific location.
 
     Attributes:
-        city_code (str): City IATA code (e.g., "HKG", "NYC", "LON")
+        agent_city_code (str): City IATA code (e.g., "HKG", "NYC", "LON")
         eye_city_name (str): Name of the eyeball city
         eye_country_name (str): Country name where the eyeball is located
         org_name (str): Organization name providing the eyeball service
         asn (str): Autonomous System Number
     """
-    city_code: str = Field(validation_alias='agent_city_code')
+    agent_city_code: str
     eye_city_name: str
     eye_country_name: str
     org_name: str
@@ -119,7 +119,7 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
         
     Returns:
         List[EyeballCoverageResult]: List of eyeball coverage results containing:
-            - city_code: The queried city IATA code
+            - agent_city_code: The queried city IATA code
             - eye_city_name: Name of the city where eyeball infrastructure is located
             - eye_country_name: Country of the eyeball infrastructure
             - org_name: ISP or organization providing the eyeball service
