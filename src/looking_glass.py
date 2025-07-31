@@ -165,7 +165,6 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-
 class ZGATestResult(BaseModel):
     """
     ZGA network test result comparing latency between public internet and ZGA acceleration.
@@ -233,6 +232,53 @@ def execute_zga_test(city: str) -> list[ZGATestResult]:
 
     except ValidationError as e:
         raise ToolError(f"Invalid response format. Details: {str(e)}")
+
+    except Exception as e:
+        raise ToolError(f"Unexpected error occurred: {str(e)}")
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+class RouterExploreResult(BaseModel):
+    """
+    Router network exploration result from ping, mtr, or bgp commands.
+
+    Attributes:
+        explore_type (Literal['ping', 'mtr', 'bgp']): Type of network exploration command executed
+        result (str): Standard command output text from the executed network tool
+    """
+    explore_type: Literal['ping', 'mtr', 'bgp']
+    result: str
+
+
+@lg_mcp.tool()
+def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacenter: str, target_ip_or_domain: str) -> RouterExploreResult:
+    """Execute network exploration commands (ping, mtr, bgp) from specified datacenter to target
+    
+    Performs network diagnostics using standard tools to analyze connectivity, routing paths,
+    and network performance from datacenter infrastructure to specified IP addresses or domains.
+    
+    Args:
+        explore_type (Literal['ping', 'mtr', 'bgp']): Network exploration command type
+        datacenter (str): Source datacenter location code
+        target_ip_or_domain (str): Target IP address or domain name to test
+        
+    Returns:
+        RouterExploreResult: Contains:
+            - explore_type: The executed command type
+            - result: Raw command output text with network diagnostic information
+            
+    Raises:
+        ToolError: When service unavailable or invalid parameters
+    """
+    try:
+        url = f"http://localhost:8000/looking-glass/router/explore?datacenter={datacenter}&test_type={explore_type}&target_ip_or_domain={target_ip_or_domain}"
+
+        response = httpx.get(url)
+        response.raise_for_status()
+        res_json = response.json()
+        slog.info(f"[router explore] result for {explore_type}: {res_json}")
+
+        return RouterExploreResult(**res_json)
 
     except Exception as e:
         raise ToolError(f"Unexpected error occurred: {str(e)}")

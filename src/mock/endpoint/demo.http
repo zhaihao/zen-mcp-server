@@ -9,3 +9,7 @@ GET http://localhost:8000/looking-glass/eyeball/coverage?city=LAX
 
 ###
 GET http://localhost:8000/looking-glass/zga/test?city=LAX
+
+
+###
+GET http://localhost:8000/looking-glass/router/explore?datacenter=a&test_type=bgp&target_ip_or_domain=baidu.com

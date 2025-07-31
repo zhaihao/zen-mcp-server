@@ -1,0 +1,14 @@
+[
+  {
+    "explore_type": "ping",
+    "result": "PING 104.18.33.45 (104.18.33.45) 56(84) bytes of data.\n64 bytes from 104.18.33.45: icmp_seq=1 ttl=56 time=4.95 ms\n64 bytes from 104.18.33.45: icmp_seq=2 ttl=56 time=4.93 ms\n64 bytes from 104.18.33.45: icmp_seq=3 ttl=56 time=4.92 ms\n64 bytes from 104.18.33.45: icmp_seq=4 ttl=56 time=4.94 ms\n64 bytes from 104.18.33.45: icmp_seq=5 ttl=56 time=4.92 ms\n64 bytes from 104.18.33.45: icmp_seq=6 ttl=56 time=4.93 ms\n64 bytes from 104.18.33.45: icmp_seq=7 ttl=56 time=4.93 ms\n64 bytes from 104.18.33.45: icmp_seq=8 ttl=56 time=4.96 ms\n64 bytes from 104.18.33.45: icmp_seq=9 ttl=56 time=4.96 ms\n64 bytes from 104.18.33.45: icmp_seq=10 ttl=56 time=4.92 ms\n\n--- 104.18.33.45 ping statistics ---\n10 packets transmitted, 10 received, 0% packet loss, time 1802ms\nrtt min/avg/max/mdev = 4.915/4.937/4.964/0.016 ms"
+  },
+  {
+    "explore_type": "bgp",
+    "result": "BGP routing table entry for 172.64.154.0/24, version 17044042\nPaths: (2 available, best #1, table default)\n  8966 13335, (aggregated by 13335 162.158.96.1), (Received from a RR-client)\n    107.155.20.9 from 107.155.20.9 (107.155.20.9)\n      Origin IGP, metric 0, localpref 500, valid, internal, best (Router ID)\n      Community: 13335:10060 13335:19060 13335:20000 13335:20500 13335:20530 21859:26 21859:190 21859:292 21859:6001 65502:3 65503:8966\n      AddPath ID: RX 0, TX-All 2023514 TX-Best-Per-AS 0 TX-Best-Selected 0\n      Last update: Fri Jul 25 02:46:33 2025\n  8529 13335, (aggregated by 13335 162.158.28.1), (Received from a RR-client)\n    107.155.20.10 from 107.155.20.10 (107.155.20.10)\n      Origin IGP, metric 0, localpref 500, valid, internal\n      Community: 8529:530 13335:10055 21859:26 21859:190 21859:292 21859:6001 65502:3 65503:8529\n      AddPath ID: RX 0, TX-All 175828 TX-Best-Per-AS 0 TX-Best-Selected 0\n      Last update: Thu Jul 31 03:41:51 2025"
+  },
+  {
+    "explore_type": "mtr",
+    "result": "Start: 2025-07-31T09:19:58+0000\nHOST:                      Loss% Drop   Rcv   Snt  Last  Best   Avg  Wrst StDev\n  1.|-- 128.1.59.129          0.0%    0    10    10   1.1   1.1   1.4   1.9   0.2\n  2.|-- 104.254.116.54        0.0%    0    10    10   1.9   1.2  24.1 207.2  64.5\n  3.|-- 107.155.20.178        0.0%    0    10    10   0.2   0.2   0.2   0.2   0.0\n  4.|-- 195.229.27.29        30.0%    3     7    10   3.0   2.9   3.0   3.3   0.1\n  5.|-- 5.195.70.160          0.0%    0    10    10  19.9   3.2   6.5  19.9   6.8\n  6.|-- 194.170.186.117       0.0%    0    10    10   5.3   5.3   5.7   6.0   0.2\n  7.|-- 195.229.4.43          0.0%    0    10    10  13.2   5.0  13.0  27.7   9.5\n  8.|-- 172.64.154.211        0.0%    0    10    10   5.0   5.0   5.0   5.1   0.0"
+  }
+]
