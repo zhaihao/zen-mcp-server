@@ -97,6 +97,7 @@ class EyeballCoverageResult(BaseModel):
         eye_country_name (str): Country name where the eyeball is located
         org_name (str): Organization name providing the eyeball service
         asn (str): Autonomous System Number
+        delay (float): Network latency in milliseconds
     """
     agent_city_code: str
     eye_city_name: str
@@ -125,6 +126,7 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
             - eye_country_name: Country of the eyeball infrastructure
             - org_name: ISP or organization providing the eyeball service
             - asn: Autonomous System Number for the network
+            - delay: Network latency in milliseconds
         
     Raises:
         ToolError: When service unavailable or invalid city code
