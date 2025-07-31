@@ -26,7 +26,7 @@ class CityDelayModel(BaseModel):
     public_network_delay: str
 
 
-@lg_mcp.tool()
+@lg_mcp.tool(name='Check Network Latency')
 def get_city_delay(
         from_city: str,
         to_city: str
@@ -105,7 +105,7 @@ class EyeballCoverageResult(BaseModel):
     asn: str
 
 
-@lg_mcp.tool()
+@lg_mcp.tool(name='Get Network Infrastructure Coverage')
 def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
     """Query eyeball coverage information for network infrastructure in a specific city
     
