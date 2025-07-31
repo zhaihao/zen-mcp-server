@@ -259,7 +259,13 @@ def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacent
     
     Args:
         explore_type (Literal['ping', 'mtr', 'bgp']): Network exploration command type
-        datacenter (str): Source datacenter location code
+        datacenter (str): Source datacenter code. Supported datacenters:
+            - s1001: Los Angeles, US
+            - s1002: San Jose, US  
+            - s1003: Seattle, US
+            - s1093: Jeddah, SA
+            - s1101: Ashburn, US
+            - s1102: Miami, US
         target_ip_or_domain (str): Target IP address or domain name to test
         
     Returns:
