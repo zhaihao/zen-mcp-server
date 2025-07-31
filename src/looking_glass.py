@@ -256,6 +256,7 @@ def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacent
     
     Performs network diagnostics using standard tools to analyze connectivity, routing paths,
     and network performance from datacenter infrastructure to specified IP addresses or domains.
+    Display the result field as terminal command output in code block format.
     
     Args:
         explore_type (Literal['ping', 'mtr', 'bgp']): Network exploration command type
