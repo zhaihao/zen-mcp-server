@@ -277,7 +277,7 @@ def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacent
         ToolError: When service unavailable or invalid parameters
     """
     try:
-        url = f"http://localhost:8000/looking-glass/router/explore?datacenter={datacenter}&test_type={explore_type}&target_ip_or_domain={target_ip_or_domain}"
+        url = f"http://localhost:8000/looking-glass/router/explore?datacenter={datacenter}&explore_type={explore_type}&target_ip_or_domain={target_ip_or_domain}"
 
         response = httpx.get(url)
         response.raise_for_status()
