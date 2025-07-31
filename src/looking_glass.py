@@ -136,7 +136,7 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
         res_json = response.json()
         slog.info(f"[eyeball coverage] result for {city}: {res_json}")
 
-        results = [EyeballCoverageResult.model_validate(**item) for item in res_json]
+        results = [EyeballCoverageResult(**item) for item in res_json]
         return results
 
     except httpx.HTTPStatusError as e:
