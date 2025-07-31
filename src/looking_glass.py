@@ -3,7 +3,7 @@ from typing import Literal, List
 from fastmcp import FastMCP
 import httpx
 from fastmcp.exceptions import ToolError
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, Field
 
 from src.utils import slog
 
@@ -98,7 +98,7 @@ class EyeballCoverageResult(BaseModel):
         org_name (str): Organization name providing the eyeball service
         asn (str): Autonomous System Number
     """
-    city_code: str
+    city_code: str = Field(validation_alias='agent_city_code')
     eye_city_name: str
     eye_country_name: str
     org_name: str
@@ -136,7 +136,7 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
         res_json = response.json()
         slog.info(f"[eyeball coverage] result for {city}: {res_json}")
 
-        results = [EyeballCoverageResult(**item) for item in res_json]
+        results = [EyeballCoverageResult.model_validate(**item) for item in res_json]
         return results
 
     except httpx.HTTPStatusError as e:
