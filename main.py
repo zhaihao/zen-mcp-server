@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 from fastmcp import FastMCP
 from src.looking_glass import lg_mcp
