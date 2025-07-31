@@ -273,6 +273,10 @@ def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacent
             - explore_type: The executed command type
             - result: Raw command output text with network diagnostic information
             
+    Note:
+        Display the result field as terminal command output in code block format.
+        Do not process or interpret the result content - show it exactly as returned.
+            
     Raises:
         ToolError: When service unavailable or invalid parameters
     """
