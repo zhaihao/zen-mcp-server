@@ -194,7 +194,7 @@ def execute_zga_test(city: str) -> list[ZGATestResult]:
     network acceleration effectiveness.
     
     Args:
-        city (str): Source city IATA code (e.g., "HKG", "NYC", "LON")
+        city (str): Source city Zenlayer internal city code (e.g., "HKG", "NYC", "LON")
         
     Returns:
         list[ZGATestResult]: List of test results, each containing:
