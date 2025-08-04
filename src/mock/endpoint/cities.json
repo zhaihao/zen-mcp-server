@@ -1,0 +1,793 @@
+[
+  {
+    "city_code": "IAD",
+    "city_name": "华盛顿 D.C.",
+    "city_name_en": "Washington, D.C.",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "JNB",
+    "city_name": "约翰内斯堡",
+    "city_name_en": "Johannesburg",
+    "country_name": "南非",
+    "country_name_en": "South Africa"
+  },
+  {
+    "city_code": "ZRH",
+    "city_name": "苏黎世",
+    "city_name_en": "Zurich",
+    "country_name": "瑞士",
+    "country_name_en": "Switzerland"
+  },
+  {
+    "city_code": "YLW",
+    "city_name": "基隆拿",
+    "city_name_en": "Kelowna",
+    "country_name": "加拿大",
+    "country_name_en": "Canada"
+  },
+  {
+    "city_code": "LIM",
+    "city_name": "利马",
+    "city_name_en": "Lima",
+    "country_name": "秘鲁",
+    "country_name_en": "Peru"
+  },
+  {
+    "city_code": "YYZ",
+    "city_name": "多伦多",
+    "city_name_en": "Toronto",
+    "country_name": "加拿大",
+    "country_name_en": "Canada"
+  },
+  {
+    "city_code": "DUB",
+    "city_name": "都柏林",
+    "city_name_en": "Dublin",
+    "country_name": "爱尔兰",
+    "country_name_en": "Ireland"
+  },
+  {
+    "city_code": "DEL",
+    "city_name": "新德里",
+    "city_name_en": "New Delhi",
+    "country_name": "印度",
+    "country_name_en": "India"
+  },
+  {
+    "city_code": "MEX",
+    "city_name": "墨西哥城",
+    "city_name_en": "Mexico City",
+    "country_name": "墨西哥",
+    "country_name_en": "Mexico"
+  },
+  {
+    "city_code": "ISB",
+    "city_name": "伊斯兰堡",
+    "city_name_en": "Islamabad",
+    "country_name": "巴基斯坦",
+    "country_name_en": "Pakistan"
+  },
+  {
+    "city_code": "BMA",
+    "city_name": "布鲁玛",
+    "city_name_en": "Bromma",
+    "country_name": "瑞典",
+    "country_name_en": "Sweden"
+  },
+  {
+    "city_code": "BKK",
+    "city_name": "曼谷",
+    "city_name_en": "Bangkok",
+    "country_name": "泰国",
+    "country_name_en": "Thailand"
+  },
+  {
+    "city_code": "TYO",
+    "city_name": "东京",
+    "city_name_en": "Tokyo",
+    "country_name": "日本",
+    "country_name_en": "Japan"
+  },
+  {
+    "city_code": "DXB",
+    "city_name": "迪拜",
+    "city_name_en": "Dubai",
+    "country_name": "阿拉伯联合酋长国",
+    "country_name_en": "United Arab Emirates"
+  },
+  {
+    "city_code": "ZHY",
+    "city_name": "宁夏",
+    "city_name_en": "Ningxia",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "EZE",
+    "city_name": "布宜诺斯艾利斯",
+    "city_name_en": "Buenos Aires",
+    "country_name": "阿根廷",
+    "country_name_en": "Argentina"
+  },
+  {
+    "city_code": "ARN",
+    "city_name": "斯德哥尔摩",
+    "city_name_en": "Stockholm",
+    "country_name": "瑞典",
+    "country_name_en": "Sweden"
+  },
+  {
+    "city_code": "DMK",
+    "city_name": "巴吞他尼",
+    "city_name_en": "Pathum Thani",
+    "country_name": "泰国",
+    "country_name_en": "Thailand"
+  },
+  {
+    "city_code": "KHH",
+    "city_name": "高雄",
+    "city_name_en": "Kaohsiung City",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "SUB",
+    "city_name": "泗水",
+    "city_name_en": "Surabaya",
+    "country_name": "印度尼西亚",
+    "country_name_en": "Indonesia"
+  },
+  {
+    "city_code": "MRS",
+    "city_name": "马赛",
+    "city_name_en": "Marseille",
+    "country_name": "法国",
+    "country_name_en": "France"
+  },
+  {
+    "city_code": "CZX",
+    "city_name": "常州",
+    "city_name_en": "Changzhou",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "BUD",
+    "city_name": "布达佩斯",
+    "city_name_en": "Budapest",
+    "country_name": "匈牙利",
+    "country_name_en": "Hungary"
+  },
+  {
+    "city_code": "FRA",
+    "city_name": "法兰克福",
+    "city_name_en": "Frankfurt",
+    "country_name": "德国",
+    "country_name_en": "Germany"
+  },
+  {
+    "city_code": "MIA",
+    "city_name": "迈阿密",
+    "city_name_en": "Miami",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "SIN",
+    "city_name": "新加坡",
+    "city_name_en": "Singapore",
+    "country_name": "新加坡",
+    "country_name_en": "Singapore"
+  },
+  {
+    "city_code": "CGD",
+    "city_name": "娄底市",
+    "city_name_en": "Loudi City",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "BLR",
+    "city_name": "班加罗尔",
+    "city_name_en": "Bangalore",
+    "country_name": "印度",
+    "country_name_en": "India"
+  },
+  {
+    "city_code": "HKG",
+    "city_name": "香港",
+    "city_name_en": "Hong Kong",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "HGH",
+    "city_name": "杭州",
+    "city_name_en": "Hangzhou",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "DAD",
+    "city_name": "岘港",
+    "city_name_en": "Da Nang",
+    "country_name": "越南",
+    "country_name_en": "Vietnam"
+  },
+  {
+    "city_code": "KWI",
+    "city_name": "科威特",
+    "city_name_en": "Kuwait",
+    "country_name": "科威特",
+    "country_name_en": "Kuwait"
+  },
+  {
+    "city_code": "BMA",
+    "city_name": "斯潘加",
+    "city_name_en": "Spånga",
+    "country_name": "瑞典",
+    "country_name_en": "Sweden"
+  },
+  {
+    "city_code": "PAR",
+    "city_name": "巴黎",
+    "city_name_en": "Paris",
+    "country_name": "法国",
+    "country_name_en": "France"
+  },
+  {
+    "city_code": "PNH",
+    "city_name": "金边",
+    "city_name_en": "Phnom Penh",
+    "country_name": "柬埔寨",
+    "country_name_en": "Cambodia"
+  },
+  {
+    "city_code": "ABV",
+    "city_name": "阿布贾",
+    "city_name_en": "Abuja",
+    "country_name": "尼日利亚",
+    "country_name_en": "Nigeria"
+  },
+  {
+    "city_code": "NYC",
+    "city_name": "纽约",
+    "city_name_en": "New York City",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "EUR",
+    "city_name": "区域",
+    "city_name_en": "Region",
+    "country_name": "通用",
+    "country_name_en": "RE"
+  },
+  {
+    "city_code": "RGN",
+    "city_name": "仰光",
+    "city_name_en": "Yangon",
+    "country_name": "缅甸",
+    "country_name_en": "Myanmar"
+  },
+  {
+    "city_code": "SYD",
+    "city_name": "悉尼",
+    "city_name_en": "Sydney",
+    "country_name": "澳大利亚",
+    "country_name_en": "Australia"
+  },
+  {
+    "city_code": "DOH",
+    "city_name": "多哈",
+    "city_name_en": "Doha",
+    "country_name": "卡塔尔",
+    "country_name_en": "Qatar"
+  },
+  {
+    "city_code": "TLV",
+    "city_name": "特拉维夫",
+    "city_name_en": "Tel Aviv",
+    "country_name": "以色列",
+    "country_name_en": "Israel"
+  },
+  {
+    "city_code": "SEA",
+    "city_name": "西雅图",
+    "city_name_en": "Seattle",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "CHI",
+    "city_name": "芝加哥",
+    "city_name_en": "Chicago",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "TYO",
+    "city_name": "千叶",
+    "city_name_en": "Chiba",
+    "country_name": "日本",
+    "country_name_en": "Japan"
+  },
+  {
+    "city_code": "JHB",
+    "city_name": "新山",
+    "city_name_en": "Johor Bahru",
+    "country_name": "马来西亚",
+    "country_name_en": "Malaysia"
+  },
+  {
+    "city_code": "CCU",
+    "city_name": "加尔各答",
+    "city_name_en": "Kolkata",
+    "country_name": "印度",
+    "country_name_en": "India"
+  },
+  {
+    "city_code": "VTE",
+    "city_name": "老挝",
+    "city_name_en": "Laos",
+    "country_name": "老挝",
+    "country_name_en": "Laos"
+  },
+  {
+    "city_code": "CAN",
+    "city_name": "广州",
+    "city_name_en": "Guangzhou",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "SZX",
+    "city_name": "深圳",
+    "city_name_en": "Shenzhen",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "LON",
+    "city_name": "伦敦",
+    "city_name_en": "London",
+    "country_name": "英国",
+    "country_name_en": "United Kingdom"
+  },
+  {
+    "city_code": "LIS",
+    "city_name": "里斯本",
+    "city_name_en": "Lisbon",
+    "country_name": "葡萄牙",
+    "country_name_en": "Portugal"
+  },
+  {
+    "city_code": "DAC",
+    "city_name": "达卡",
+    "city_name_en": "Dhaka",
+    "country_name": "孟加拉",
+    "country_name_en": "Bangladesh"
+  },
+  {
+    "city_code": "MEL",
+    "city_name": "墨尔本",
+    "city_name_en": "Melbourne",
+    "country_name": "澳大利亚",
+    "country_name_en": "Australia"
+  },
+  {
+    "city_code": "BEG",
+    "city_name": "贝尔格莱德",
+    "city_name_en": "Belgrade",
+    "country_name": "塞尔维亚",
+    "country_name_en": "Serbia"
+  },
+  {
+    "city_code": "CGO",
+    "city_name": "郑州",
+    "city_name_en": "Zhengzhou",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "KUL",
+    "city_name": "吉隆坡",
+    "city_name_en": "Kuala Lumpur",
+    "country_name": "马来西亚",
+    "country_name_en": "Malaysia"
+  },
+  {
+    "city_code": "CTU",
+    "city_name": "成都",
+    "city_name_en": "Chengdu",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "NBO",
+    "city_name": "内罗毕",
+    "city_name_en": "Nairobi",
+    "country_name": "肯尼亚",
+    "country_name_en": "Kenya"
+  },
+  {
+    "city_code": "YVR",
+    "city_name": "温哥华",
+    "city_name_en": "Vancouver",
+    "country_name": "加拿大",
+    "country_name_en": "Canada"
+  },
+  {
+    "city_code": "MXP",
+    "city_name": "米兰",
+    "city_name_en": "Milan",
+    "country_name": "意大利",
+    "country_name_en": "Italy"
+  },
+  {
+    "city_code": "TSN",
+    "city_name": "天津",
+    "city_name_en": "Tianjin",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "TPE",
+    "city_name": "台北",
+    "city_name_en": "Taipei",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "IST",
+    "city_name": "伊斯坦布尔",
+    "city_name_en": "Istanbul",
+    "country_name": "土耳其",
+    "country_name_en": "Turkey"
+  },
+  {
+    "city_code": "WUX",
+    "city_name": "无锡",
+    "city_name_en": "Wuxi",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "CAI",
+    "city_name": "开罗",
+    "city_name_en": "Cairo",
+    "country_name": "埃及",
+    "country_name_en": "Egypt"
+  },
+  {
+    "city_code": "SEL",
+    "city_name": "首尔",
+    "city_name_en": "Seoul",
+    "country_name": "韩国",
+    "country_name_en": "Korea"
+  },
+  {
+    "city_code": "BOM",
+    "city_name": "孟买",
+    "city_name_en": "Mumbai",
+    "country_name": "印度",
+    "country_name_en": "India"
+  },
+  {
+    "city_code": "MNL",
+    "city_name": "马尼拉",
+    "city_name_en": "Manila",
+    "country_name": "菲律宾",
+    "country_name_en": "Philippines"
+  },
+  {
+    "city_code": "LAX",
+    "city_name": "洛杉矶",
+    "city_name_en": "Los Angeles",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "SCL",
+    "city_name": "圣地亚哥",
+    "city_name_en": "Santiago",
+    "country_name": "智利",
+    "country_name_en": "Chile"
+  },
+  {
+    "city_code": "LED",
+    "city_name": "圣彼得堡",
+    "city_name_en": "Saint-Petersburg",
+    "country_name": "通用",
+    "country_name_en": "RE"
+  },
+  {
+    "city_code": "JED",
+    "city_name": "吉达",
+    "city_name_en": "Jeddah",
+    "country_name": "沙特阿拉伯",
+    "country_name_en": "Saudi Arabia"
+  },
+  {
+    "city_code": "ZAG",
+    "city_name": "萨格勒布",
+    "city_name_en": "Zagreb",
+    "country_name": "克罗地亚",
+    "country_name_en": "Croatia"
+  },
+  {
+    "city_code": "SHA",
+    "city_name": "上海",
+    "city_name_en": "Shanghai",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "PEK",
+    "city_name": "北京",
+    "city_name_en": "Beijing",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "RUH",
+    "city_name": "利雅得",
+    "city_name_en": "Riyadh",
+    "country_name": "沙特阿拉伯",
+    "country_name_en": "Saudi Arabia"
+  },
+  {
+    "city_code": "PRG",
+    "city_name": "布拉格",
+    "city_name_en": "Prague",
+    "country_name": "捷克",
+    "country_name_en": "Czech Republic"
+  },
+  {
+    "city_code": "XIY",
+    "city_name": "西安",
+    "city_name_en": "Xi'an",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "HEL",
+    "city_name": "赫尔辛基",
+    "city_name_en": "Helsinki",
+    "country_name": "芬兰",
+    "country_name_en": "Finland"
+  },
+  {
+    "city_code": "HYD",
+    "city_name": "海德拉巴",
+    "city_name_en": "Hyderabad",
+    "country_name": "印度",
+    "country_name_en": "India"
+  },
+  {
+    "city_code": "WAW",
+    "city_name": "华沙",
+    "city_name_en": "Warsaw",
+    "country_name": "波兰",
+    "country_name_en": "Poland"
+  },
+  {
+    "city_code": "BTH",
+    "city_name": "巴淡岛",
+    "city_name_en": "Batam",
+    "country_name": "印度尼西亚",
+    "country_name_en": "Indonesia"
+  },
+  {
+    "city_code": "SGN",
+    "city_name": "胡志明",
+    "city_name_en": "Ho Chi Minh City",
+    "country_name": "越南",
+    "country_name_en": "Vietnam"
+  },
+  {
+    "city_code": "KNO",
+    "city_name": "棉兰市",
+    "city_name_en": "Medan City",
+    "country_name": "印度尼西亚",
+    "country_name_en": "Indonesia"
+  },
+  {
+    "city_code": "DFW",
+    "city_name": "达拉斯",
+    "city_name_en": "Dallas",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "MAA",
+    "city_name": "金奈",
+    "city_name_en": "Chennai",
+    "country_name": "印度",
+    "country_name_en": "India"
+  },
+  {
+    "city_code": "HAN",
+    "city_name": "河内",
+    "city_name_en": "Hanoi",
+    "country_name": "越南",
+    "country_name_en": "Vietnam"
+  },
+  {
+    "city_code": "AMS",
+    "city_name": "阿姆斯特丹",
+    "city_name_en": "Amsterdam",
+    "country_name": "荷兰",
+    "country_name_en": "Netherlands"
+  },
+  {
+    "city_code": "SAO",
+    "city_name": "圣保罗",
+    "city_name_en": "São Paulo",
+    "country_name": "巴西",
+    "country_name_en": "Brazil"
+  },
+  {
+    "city_code": "TNA",
+    "city_name": "济南",
+    "city_name_en": "Jinan",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "CTU",
+    "city_name": "德阳",
+    "city_name_en": "Deyang",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "SZV",
+    "city_name": "苏州",
+    "city_name_en": "Suzhou",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "KHI",
+    "city_name": "卡拉奇",
+    "city_name_en": "Karachi",
+    "country_name": "巴基斯坦",
+    "country_name_en": "Pakistan"
+  },
+  {
+    "city_code": "DVO",
+    "city_name": "达沃",
+    "city_name_en": "Davao",
+    "country_name": "菲律宾",
+    "country_name_en": "Philippines"
+  },
+  {
+    "city_code": "WUH",
+    "city_name": "武汉",
+    "city_name_en": "Wuhan",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "LOS",
+    "city_name": "拉各斯",
+    "city_name_en": "Lagos",
+    "country_name": "尼日利亚",
+    "country_name_en": "Nigeria"
+  },
+  {
+    "city_code": "GIG",
+    "city_name": "卡斯蒂略",
+    "city_name_en": "Castilho",
+    "country_name": "巴西",
+    "country_name_en": "Brazil"
+  },
+  {
+    "city_code": "FOR",
+    "city_name": "福塔雷萨",
+    "city_name_en": "Fortaleza",
+    "country_name": "巴西",
+    "country_name_en": "Brazil"
+  },
+  {
+    "city_code": "PKU",
+    "city_name": "北干巴鲁",
+    "city_name_en": "Pekanbaru",
+    "country_name": "印度尼西亚",
+    "country_name_en": "Indonesia"
+  },
+  {
+    "city_code": "ATL",
+    "city_name": "亚特兰大",
+    "city_name_en": "Atlanta",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "FJR",
+    "city_name": "富查伊拉",
+    "city_name_en": "Fujairah City",
+    "country_name": "阿拉伯联合酋长国",
+    "country_name_en": "United Arab Emirates"
+  },
+  {
+    "city_code": "CEB",
+    "city_name": "宿雾市",
+    "city_name_en": "Lahug Cebu City",
+    "country_name": "菲律宾",
+    "country_name_en": "Philippines"
+  },
+  {
+    "city_code": "NTG",
+    "city_name": "南通",
+    "city_name_en": "Nantong",
+    "country_name": "中国",
+    "country_name_en": "China"
+  },
+  {
+    "city_code": "PER",
+    "city_name": "珀斯",
+    "city_name_en": "Perth",
+    "country_name": "澳大利亚",
+    "country_name_en": "Australia"
+  },
+  {
+    "city_code": "SJC",
+    "city_name": "圣何塞",
+    "city_name_en": "San Jose",
+    "country_name": "美国",
+    "country_name_en": "United States"
+  },
+  {
+    "city_code": "MAD",
+    "city_name": "马德里",
+    "city_name_en": "Madrid",
+    "country_name": "西班牙",
+    "country_name_en": "Spain"
+  },
+  {
+    "city_code": "UPG",
+    "city_name": "望加锡",
+    "city_name_en": "Makassar",
+    "country_name": "印度尼西亚",
+    "country_name_en": "Indonesia"
+  },
+  {
+    "city_code": "OSA",
+    "city_name": "大阪",
+    "city_name_en": "Osaka",
+    "country_name": "日本",
+    "country_name_en": "Japan"
+  },
+  {
+    "city_code": "JKT",
+    "city_name": "雅加达",
+    "city_name_en": "Jakarta",
+    "country_name": "印度尼西亚",
+    "country_name_en": "Indonesia"
+  },
+  {
+    "city_code": "BOG",
+    "city_name": "波哥大",
+    "city_name_en": "Bogotá",
+    "country_name": "哥伦比亚",
+    "country_name_en": "Colombia"
+  },
+  {
+    "city_code": "ATH",
+    "city_name": "雅典",
+    "city_name_en": "Athens",
+    "country_name": "希腊",
+    "country_name_en": "Greece"
+  },
+  {
+    "city_code": "BBU",
+    "city_name": "布加勒斯特",
+    "city_name_en": "Bucharest",
+    "country_name": "罗马尼亚",
+    "country_name_en": "Romania"
+  }
+]

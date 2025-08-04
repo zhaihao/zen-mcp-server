@@ -15,8 +15,8 @@ class CityDelayModel(BaseModel):
     Network latency measurement between two cities.
 
     Attributes:
-        from_city (str): Source city IATA code (e.g., 'HKG', 'LAX')
-        to_city (str): Destination city IATA code
+        from_city (str): Source city Zenlayer internal city code (e.g., 'HKG', 'LAX')
+        to_city (str): Destination city Zenlayer internal city code
         private_line_delay (str): Latency via private network (e.g., '120ms') or 'no data provide' if unavailable
         public_network_delay (str): Latency via public internet (e.g., '150ms') or 'no data provide' if unavailable
     """
@@ -36,16 +36,19 @@ def get_city_delay(
     Simultaneously retrieves latency measurements for both dedicated private lines
     and public internet paths between specified city pairs. Always returns data,
     with 'no data provide' when specific latency measurements are unavailable.
+    
+    IMPORTANT: If you only have city names (not Zenlayer city codes), use get_city_code 
+    tool first to convert city names to Zenlayer internal city codes before calling this function.
 
     Args:
-        from_city (str): Source city IATA code (e.g., "HKG", "NYC", "LON")
-        to_city (str): Destination city IATA code (e.g., "TYO", "SIN", "FRA")
+        from_city (str): Source city Zenlayer internal city code (e.g., "HKG", "NYC", "LON")
+        to_city (str): Destination city Zenlayer internal city code (e.g., "TYO", "SIN", "FRA")
 
     Returns:
         CityDelayModel: Always contains response with:
             - private_line_delay: Latency in ms (e.g., '120ms') or 'no data provide'
             - public_network_delay: Latency in ms (e.g., '150ms') or 'no data provide'
-            - from_city/to_city: Source and destination city codes
+            - from_city/to_city: Source and destination Zenlayer internal city codes
 
     Raises:
         ToolError: When service unavailable or invalid city codes
@@ -251,7 +254,8 @@ class RouterExploreResult(BaseModel):
 
 
 @lg_mcp.tool()
-def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacenter: str, target_ip_or_domain: str) -> RouterExploreResult:
+def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacenter: str,
+                           target_ip_or_domain: str) -> RouterExploreResult:
     """Execute network exploration commands (ping, mtr, bgp) from specified datacenter to target
     
     Performs network diagnostics using standard tools to analyze connectivity, routing paths,
@@ -290,6 +294,67 @@ def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacent
         slog.info(f"[router explore] result for {explore_type}: {res_json}")
 
         return RouterExploreResult(**res_json)
+
+    except Exception as e:
+        raise ToolError(f"Unexpected error occurred: {str(e)}")
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+class CityResult(BaseModel):
+    """
+    City information result containing location details and Zenlayer city code.
+
+    Attributes:
+        city_code_on_zenlayer (str): Zenlayer internal city code (e.g., 'HKG', 'NYC', 'LON')
+        city_name (str): City name in Chinese (e.g., '香港', '纽约', '伦敦')
+        city_name_en (str): City name in English
+        country_name (str): Country name in Chinese (e.g., '中国', '美国', '英国')
+        country_name_en (str): Country name in English
+    """
+    city_code_on_zenlayer: str
+    city_name: str
+    city_name_en: str
+    country_name: str
+    country_name_en: str
+
+
+@lg_mcp.tool()
+def get_city_code(city_name_en: str) -> CityResult:
+    """Query Zenlayer city code and location details by English city name
+    
+    This tool is primarily used to prepare city codes for other operations that require 
+    Zenlayer internal city codes. Retrieves comprehensive city information including 
+    Zenlayer's internal city code, localized names, and country information based on 
+    the provided English city name.
+    
+    Args:
+        city_name_en (str): English city name (e.g., "Hong Kong", "New York", "London")
+        
+    Returns:
+        CityResult: City information containing:
+            - city_code_on_zenlayer: Zenlayer internal city code (e.g., 'HKG', 'NYC', 'LON')
+            - city_name: City name in Chinese (e.g., '香港', '纽约', '伦敦')
+            - city_name_en: City name in English
+            - country_name: Country name in Chinese (e.g., '中国', '美国', '英国')
+            - country_name_en: Country name in English
+            
+    Raises:
+        ToolError: When service unavailable or city not found
+    """
+    try:
+        url = f"http://localhost:8000/looking-glass/city?city_name_en={city_name_en}"
+
+        response = httpx.get(url)
+        response.raise_for_status()
+        res_json = response.json()
+        slog.info(f"[get city code] result for {city_name_en}: {res_json}")
+        return CityResult(city_code_on_zenlayer=res_json["city_code"],
+                          city_name=res_json["city_name"],
+                          city_name_en=res_json["city_name_en"],
+                          country_name=res_json["country_name"],
+                          country_name_en=res_json["country_name_en"]
+                          )
 
     except Exception as e:
         raise ToolError(f"Unexpected error occurred: {str(e)}")
