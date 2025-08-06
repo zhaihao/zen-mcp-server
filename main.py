@@ -12,7 +12,7 @@ logging.getLogger("uvicorn").setLevel(logging.DEBUG)
 mcp = FastMCP(
     name="Zenlayer MCP Server",
     instructions='Network latency query service for Zenlayer backbone network',
-    stateless_http=False,
+    stateless_http=True,
 )
 
 # 直接导入服务器
