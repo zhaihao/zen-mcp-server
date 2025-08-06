@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8000/looking-glass/city/delay?from_city=HKG&to_city=LAX
+GET http://localhost:8000/looking-glass/city/delay?from_city=LAX&to_city=MOW
 
 
 ###

@@ -37,7 +37,8 @@ def get_city_delay(
     and public internet paths between specified city pairs. Always returns data,
     with 'no data provide' when specific latency measurements are unavailable.
     
-    IMPORTANT: If you only have city names (not Zenlayer city codes), use get_city_code 
+    IMPORTANT: Only infer the departure and destination cities from the user's conversation.
+    You cannot make assumptions on your own. If unable to infer, actively ask the user for clarification. If you only have city names (not Zenlayer city codes), use get_city_code
     tool first to convert city names to Zenlayer internal city codes before calling this function.
 
     Args:
