@@ -51,6 +51,8 @@ def get_city_delay(
         ToolError: When service unavailable or invalid city codes
     """
     try:
+        if from_city==to_city:
+            raise ToolError('You have provided one city. Please specify another city to measure network latency between them.')
         url = f"http://localhost:8000/looking-glass/city/delay?from_city={from_city}&to_city={to_city}"
 
         response = httpx.get(url)
