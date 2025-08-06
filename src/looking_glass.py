@@ -15,7 +15,7 @@ class CityDelayModel(BaseModel):
     Network latency measurement between two cities.
 
     Attributes:
-        from_city (str): Source city Zenlayer internal city code (e.g., 'HKG', 'LAX')
+        from_city (str): Source city Zenlayer internal city code
         to_city (str): Destination city Zenlayer internal city code
         private_line_delay (str): Latency via private network (e.g., '120ms') or 'no data provide' if unavailable
         public_network_delay (str): Latency via public internet (e.g., '150ms') or 'no data provide' if unavailable
@@ -38,8 +38,8 @@ def get_city_delay(
     tool first to convert city names to Zenlayer internal city codes before calling this function.
 
     Args:
-        from_city (str): Source city Zenlayer internal city code (e.g., "HKG", "NYC", "LON")
-        to_city (str): Destination city Zenlayer internal city code (e.g., "TYO", "SIN", "FRA")
+        from_city (str): Source city Zenlayer internal city code
+        to_city (str): Destination city Zenlayer internal city code
 
     Returns:
         CityDelayModel: Always contains response with:
@@ -92,7 +92,7 @@ class EyeballCoverageResult(BaseModel):
     Eyeball coverage information for a specific location.
 
     Attributes:
-        agent_city_code (str): City IATA code (e.g., "HKG", "NYC", "LON")
+        agent_city_code (str):  Zenlayer internal city code
         eye_city_name (str): Name of the eyeball city
         eye_country_name (str): Country name where the eyeball is located
         org_name (str): Organization name providing the eyeball service
@@ -116,11 +116,11 @@ def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
     geographic coverage details.
     
     Args:
-        city (str): City IATA code (e.g., "HKG", "NYC", "LON")
+        city (str):  Zenlayer internal city code
         
     Returns:
         List[EyeballCoverageResult]: List of eyeball coverage results containing:
-            - agent_city_code: The queried city IATA code
+            - agent_city_code: The queried  Zenlayer internal city code
             - eye_city_name: Name of the city where eyeball infrastructure is located
             - eye_country_name: Country of the eyeball infrastructure
             - org_name: ISP or organization providing the eyeball service
@@ -172,7 +172,7 @@ class ZGATestResult(BaseModel):
     Attributes:
         via_public_internet_delay (str): Latency via public internet (e.g., '120ms') or 'no data provide' if unavailable
         via_zga_delay (str): Latency via ZGA acceleration network (e.g., '80ms') or 'no data provide' if unavailable
-        target (str): Target node city code or node name (e.g., 'HKG', 'NYC', 'LON')
+        target (str): Target node Zenlayer internal city code
         improvement_percentage (str): ZGA improvement percentage (e.g., '85%')
     """
     via_public_internet_delay: str
@@ -191,7 +191,7 @@ def execute_zga_test(city: str) -> list[ZGATestResult]:
     network acceleration effectiveness.
     
     Args:
-        city (str): Source city Zenlayer internal city code (e.g., "HKG", "NYC", "LON")
+        city (str): Source city Zenlayer internal city code
         
     Returns:
         list[ZGATestResult]: List of test results, each containing:
@@ -303,10 +303,10 @@ class CityResult(BaseModel):
     City information result containing location details and Zenlayer city code.
 
     Attributes:
-        city_code_on_zenlayer (str): Zenlayer internal city code (e.g., 'HKG', 'NYC', 'LON')
-        city_name (str): City name in Chinese (e.g., '香港', '纽约', '伦敦')
+        city_code_on_zenlayer (str): Zenlayer internal city code
+        city_name (str): City name in Chinese
         city_name_en (str): City name in English
-        country_name (str): Country name in Chinese (e.g., '中国', '美国', '英国')
+        country_name (str): Country name in Chinese
         country_name_en (str): Country name in English
     """
     city_code_on_zenlayer: str
@@ -317,7 +317,7 @@ class CityResult(BaseModel):
 
 
 @lg_mcp.tool()
-def get_city_code(city_name_en: str) -> CityResult:
+def get_zenlayer_internal_city_code(city_name_en: str) -> CityResult:
     """Query Zenlayer city code and location details by English city name
     
     This tool is primarily used to prepare city codes for other operations that require 
@@ -326,14 +326,14 @@ def get_city_code(city_name_en: str) -> CityResult:
     the provided English city name.
     
     Args:
-        city_name_en (str): English city name (e.g., "Hong Kong", "New York", "London")
+        city_name_en (str): English city name
         
     Returns:
         CityResult: City information containing:
-            - city_code_on_zenlayer: Zenlayer internal city code (e.g., 'HKG', 'NYC', 'LON')
-            - city_name: City name in Chinese (e.g., '香港', '纽约', '伦敦')
+            - city_code_on_zenlayer: Zenlayer internal city code
+            - city_name: City name in Chinese
             - city_name_en: City name in English
-            - country_name: Country name in Chinese (e.g., '中国', '美国', '英国')
+            - country_name: Country name in Chinese
             - country_name_en: Country name in English
             
     Raises:
