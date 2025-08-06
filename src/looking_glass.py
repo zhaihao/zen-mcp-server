@@ -342,6 +342,7 @@ def get_city_code(city_name_en: str) -> CityResult:
     Raises:
         ToolError: When service unavailable or city not found
     """
+    slog.info(f"get city code:{city_name_en}")
     try:
         url = f"http://localhost:8000/looking-glass/city?city_name_en={city_name_en}"
 
