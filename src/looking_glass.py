@@ -1,4 +1,5 @@
 from typing import Literal, List
+import re
 
 from fastmcp import FastMCP
 import httpx
@@ -50,9 +51,13 @@ def get_city_delay(
     Raises:
         ToolError: When service unavailable or invalid city codes
     """
+    # Validate city code format (3 English letters)
+    if not re.match(r'^[A-Za-z]{3}$', from_city) or not re.match(r'^[A-Za-z]{3}$', to_city):
+        raise ToolError(f"Invalid city code, city code must be 3 English letters.")
+    if from_city==to_city:
+        raise ToolError('You have provided one city. Please specify another city to measure network latency between them.')
+
     try:
-        if from_city==to_city:
-            raise ToolError('You have provided one city. Please specify another city to measure network latency between them.')
         url = f"http://localhost:8000/looking-glass/city/delay?from_city={from_city}&to_city={to_city}"
 
         response = httpx.get(url)
@@ -349,12 +354,16 @@ def get_zenlayer_internal_city_code(city_name_en: str) -> CityResult:
         response.raise_for_status()
         res_json = response.json()
         slog.info(f"[get city code] result for {city_name_en}: {res_json}")
+        if not res_json:
+            raise ToolError("Sorry, the city you queried could not be found. Please check if the city name is correct, or the region may not be covered by a Zenlayer POP node.")
+
         return CityResult(city_code_on_zenlayer=res_json["city_code"],
                           city_name=res_json["city_name"],
                           city_name_en=res_json["city_name_en"],
                           country_name=res_json["country_name"],
                           country_name_en=res_json["country_name_en"]
                           )
-
+    except ToolError as te:
+        raise te
     except Exception as e:
         raise ToolError(f"Unexpected error occurred: {str(e)}")
