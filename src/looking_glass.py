@@ -116,11 +116,14 @@ class EyeballCoverageResult(BaseModel):
 
 @lg_mcp.tool()
 def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
-    """Query eyeball coverage information for network infrastructure in a specific city
-    
-    Retrieves detailed information about eyeball networks (end-user access points) 
+    """Retrieves detailed information about eyeball networks (end-user access points)
     available in the specified city, including ISP organizations, ASN numbers, and 
     geographic coverage details.
+
+    Usage Scenario:
+        This tool is intended for situations where a user wants to determine whether eyeball network
+        coverage from one city or region reaches another specific location. It is useful for evaluating
+        regional coverage, ISP availability, or inter-country connectivity based on Zenlayer's network infrastructure.
     
     Args:
         city (str):  Zenlayer internal city code
