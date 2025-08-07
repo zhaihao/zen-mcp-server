@@ -53,7 +53,7 @@ def get_city_delay(
     """
     # Validate city code format (3 English letters)
     if not re.match(r'^[A-Za-z]{3}$', from_city) or not re.match(r'^[A-Za-z]{3}$', to_city):
-        raise ToolError(f"Invalid city code, city code must be 3 English letters.")
+        raise ToolError(f"Invalid city code, use the appropriate tool to look up and return the correct city code for the given city name.")
     if from_city==to_city:
         raise ToolError('You have provided one city. Please specify another city to measure network latency between them.')
 
