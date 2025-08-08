@@ -1,10 +1,10 @@
-from typing import Literal, List
 import re
+from typing import Literal, List
 
-from fastmcp import FastMCP
 import httpx
+from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, ValidationError
 
 from src.utils import slog
 
