@@ -32,26 +32,35 @@ def get_city_delay(
         from_city: str,
         to_city: str
 ) -> CityDelayModel:
-    """Query network latency between two cities via both private and public networks
-
-    IMPORTANT: Only infer the departure and destination cities from the user's conversation.
-    You cannot make assumptions on your own. If unable to infer, actively ask the user for clarification. If you only have city names (not Zenlayer city codes), use get_city_code
-    tool first to convert city names to Zenlayer internal city codes before calling this function.
-
-    Args:
-        from_city (str): Source city Zenlayer internal city code
-        to_city (str): Destination city Zenlayer internal city code
-
-    Returns:
-        CityDelayModel: Always contains response with:
-            - private_line_delay: Latency in ms (e.g., '120ms') or 'no data provide'
-            - public_network_delay: Latency in ms (e.g., '150ms') or 'no data provide'
-            - from_city/to_city: Source and destination Zenlayer internal city codes
-
-    Raises:
-        ToolError: When service unavailable or invalid city codes
     """
-    # Validate city code format (3 English letters)
+    Get latency (private Zenlayer backbone & public internet) between two cities.
+    IMPORTANT: Only infer the departure and destination cities from the user's conversation.
+    You cannot make assumptions on your own. If unable to infer, actively ask the user for clarification.
+    If you only have city names (not Zenlayer city codes), use get_city_code
+    tool first to convert city names to Zenlayer internal city codes before calling this function.
+    Use Cases:
+        Check latency over Zenlayer backbone/dedicated line.
+        Check latency over public internet.
+    Args:
+        from_city (str): Source city code (Zenlayer internal).
+        to_city (str): Destination city code (Zenlayer internal).
+    Returns:
+        CityDelayModel:
+            from_city (str): Source city Zenlayer internal city code
+            to_city (str): Destination city Zenlayer internal city code
+            private_line_delay (str): Latency via private network (e.g., '120ms') or 'no data provide' if unavailable
+            public_network_delay (str): Latency via public internet (e.g., '150ms') or 'no data provide' if unavailable
+    Rules:
+        Both cities must be in supported list.
+        If public > private latency → show both, highlight private advantage.
+    Dialog Logic:
+        If to_city missing → ask "Which destination? Private or public?"
+        If city not found → suggest nearest city, ask to confirm.
+        On confirm → return delays.
+    Output format:
+        Return values.
+        Analyze & explain the data results.
+    """
     if not re.match(r'^[A-Za-z]{3}$', from_city) or not re.match(r'^[A-Za-z]{3}$', to_city):
         raise ToolError(f"Invalid city code, use the appropriate tool to look up and return the correct city code for the given city name.")
     if from_city==to_city:
@@ -116,33 +125,31 @@ class EyeballCoverageResult(BaseModel):
 
 @lg_mcp.tool()
 def get_eyeball_coverage(city: str) -> List[EyeballCoverageResult]:
-    """Retrieves detailed information about eyeball networks (end-user access points)
-    available in the specified city, including ISP organizations, ASN numbers, and 
-    geographic coverage details.
-
-    Usage Scenario:
-        This tool is intended for situations where a user wants to determine whether eyeball network
-        coverage from one city or region reaches another specific location. It is useful for evaluating
-        regional coverage, ISP availability, or inter-country connectivity based on Zenlayer's network infrastructure.
-    
+    """
+    Retrieve ISP coverage and performance metrics for a given city.
+    Use Cases:
+        List ISPs covering / partnering in a city with latency data.
+        Check if a specific ISP covers a city.
+    Identify cities covered by a specific ISP (e.g., APAC, Europe).
     Args:
-        city (str):  Zenlayer internal city code
-        
+        city (str): Zenlayer internal city code.
     Returns:
-        List[EyeballCoverageResult]: List of eyeball coverage results containing:
-            - agent_city_code: The queried  Zenlayer internal city code
-            - eye_city_name: Name of the city where eyeball infrastructure is located
-            - eye_country_name: Country of the eyeball infrastructure
-            - org_name: ISP or organization providing the eyeball service
-            - asn: Autonomous System Number for the network
-            - delay: Network latency in milliseconds (unit preserved unchanged)
-        
-    Note:
+        List[EyeballCoverageResult]:
+            agent_city_code (str): Queried city code.
+            eye_city_name (str): Eyeball infra city name.
+            eye_country_name (str): Country of eyeball infra.
+            org_name (str): ISP or organization name.
+            asn (str): Autonomous System Number.
+            delay (str): Network latency in ms (unit preserved).
+    Constraints:
+        city must exist in supported city list.
+    Dialog Flow:
+        If city missing or is a region → ask user for specific city or ISP with highest coverage.
+        If city not found → suggest nearest city → ask for confirmation.
+        On confirmation → return ISP coverage with delays.
+   Output format:
         Results should be displayed in table format for better readability.
         Delay values maintain original ms unit format.
-        
-    Raises:
-        ToolError: When service unavailable or invalid city code
     """
     try:
         url = f"http://localhost:8000/looking-glass/eyeball/coverage?city={city}"
@@ -193,29 +200,30 @@ class ZGATestResult(BaseModel):
 
 @lg_mcp.tool()
 def execute_zga_test(city: str) -> list[ZGATestResult]:
-    """Test network latency from specified city to global major nodes, comparing public internet vs ZGA acceleration
-    
-    Executes network latency tests simultaneously through both public internet and 
-    Zenlayer's ZGA (Zero-distance Global Acceleration) program to test connectivity 
-    performance from user's city to major global network nodes, helping evaluate 
-    network acceleration effectiveness.
-    
+    """
+    Test 1MB file download speed from a given city to compare public internet vs ZGA acceleration.
+    Use Cases:
+        Compare public vs ZGA latency for a specific city.
+        Estimate performance improvement with ZGA.
+        Test acceleration for applications and dynamic content (video, gaming, documents).
     Args:
-        city (str): Source city Zenlayer internal city code
-        
+        city (str): Source city code (Zenlayer internal).
     Returns:
-        list[ZGATestResult]: List of test results, each containing:
-            - via_public_internet_delay: Public internet latency (e.g., '120ms') or 'no data provide'
-            - via_zga_delay: ZGA acceleration network latency (e.g., '80ms') or 'no data provide'
-            - target: Target node city code or name
-            - improvement_percentage: ZGA improvement percentage (e.g., '85%')
-            
-    Note:
-        Results should be displayed in table format for better comparison of public vs ZGA performance.
-        Delay values maintain original ms unit format.
-        
+        list[ZGATestResult]:
+            via_public_internet_delay (str): Public latency in ms or "no data".
+            via_zga_delay (str): ZGA latency in ms or "no data".
+            target (str): Target node city code or name.
+            improvement_percentage (str): ZGA improvement percentage.
     Raises:
         ToolError: When service unavailable or invalid city code
+    Constraints:
+        City must be in supported list.
+    Dialog Flow:
+        City missing → ask for specific city.
+        City not found → suggest nearest → ask for confirmation.
+        On confirmation → run test → return table with delays & improvement %.
+    Output:
+        Table format comparing public vs ZGA performance. Latency values retain ms units.
     """
     try:
         url = f"http://localhost:8000/looking-glass/zga/test?city={city}"
@@ -263,34 +271,36 @@ class RouterExploreResult(BaseModel):
 @lg_mcp.tool()
 def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacenter: str,
                            target_ip_or_domain: str) -> RouterExploreResult:
-    """Execute network exploration commands (ping, mtr, bgp) from specified datacenter to target
-    
-    Performs network diagnostics using standard tools to analyze connectivity, routing paths,
-    and network performance from datacenter infrastructure to specified IP addresses or domains.
-    Display the result field as terminal command output in code block format.
-    
+    """
+    Run IPv4 network diagnostics (BGP, Ping, MTR) from a given datacenter to a target IP or domain.
+    Use Cases:
+        Measure latency, packet loss, and routing path.
+        Test connectivity from a datacenter to a target.
+        Diagnose high latency or poor network performance.
     Args:
-        explore_type (Literal['ping', 'mtr', 'bgp']): Network exploration command type
-        datacenter (str): Source datacenter code. Supported datacenters:
+        explore_type (Literal['ping', 'mtr', 'bgp']): Test type; default is 'ping'.
+        datacenter (str): Source datacenter code (must be in supported list).
             - s1001: Los Angeles, US
-            - s1002: San Jose, US  
+            - s1002: San Jose, US
             - s1003: Seattle, US
             - s1093: Jeddah, SA
             - s1101: Ashburn, US
             - s1102: Miami, US
-        target_ip_or_domain (str): Target IP address or domain name to test
-        
+        target_ip_or_domain (str): Target IPv4 address or domain.
     Returns:
-        RouterExploreResult: Contains:
-            - explore_type: The executed command type
-            - result: Raw command output text with network diagnostic information
-            
-    Note:
-        Display the result field as terminal command output in code block format.
-        Do not process or interpret the result content - show it exactly as returned.
-            
-    Raises:
-        ToolError: When service unavailable or invalid parameters
+        RouterExploreResult:
+        explore_type (str): Executed command type.
+        result (str): Raw command output with diagnostic info.
+    Constraints:
+        datacenter must be in supported list.
+        explore_type must be one of 'ping', 'mtr', 'bgp'.
+    Dialog Flow:
+        If any of explore_type, datacenter, or target missing → ask user.
+        If datacenter invalid → suggest nearest supported location → confirm.
+    Run test → return raw output.
+        If user asked about network quality → parse and give conclusion.
+    Output:
+        Show `result` exactly as returned in a code block (no processing)
     """
     try:
         url = f"http://localhost:8000/looking-glass/router/explore?datacenter={datacenter}&explore_type={explore_type}&target_ip_or_domain={target_ip_or_domain}"
