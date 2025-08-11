@@ -12,15 +12,6 @@ lg_mcp = FastMCP(name="LookingGlass MCP")
 
 
 class CityDelayModel(BaseModel):
-    """
-    Network latency measurement between two cities.
-
-    Attributes:
-        from_city (str): Source city Zenlayer internal city code
-        to_city (str): Destination city Zenlayer internal city code
-        private_line_delay (str): Latency via private network (e.g., '120ms') or 'no data provide' if unavailable
-        public_network_delay (str): Latency via public internet (e.g., '150ms') or 'no data provide' if unavailable
-    """
     from_city: str
     to_city: str
     private_line_delay: str
@@ -32,11 +23,10 @@ def get_city_delay(
         from_city: str,
         to_city: str
 ) -> CityDelayModel:
-    """Query network latency between two cities via both private and public networks
+    """
+    Query latency data between two cities for private line networks and public Internet
 
-    IMPORTANT: Only infer the departure and destination cities from the user's conversation.
-    You cannot make assumptions on your own. If unable to infer, actively ask the user for clarification. If you only have city names (not Zenlayer city codes), use get_city_code
-    tool first to convert city names to Zenlayer internal city codes before calling this function.
+    IMPORTANT: Only infer the departure and destination cities from the user's conversation.You cannot make assumptions on your own. If unable to infer, actively ask the user for clarification. If you only have city names (not Zenlayer internal city codes), use `get_city_code` tool first to convert city names to Zenlayer internal city codes before calling this function.
 
     Args:
         from_city (str): Source city Zenlayer internal city code
@@ -44,18 +34,16 @@ def get_city_delay(
 
     Returns:
         CityDelayModel: Always contains response with:
-            - private_line_delay: Latency in ms (e.g., '120ms') or 'no data provide'
-            - public_network_delay: Latency in ms (e.g., '150ms') or 'no data provide'
-            - from_city/to_city: Source and destination Zenlayer internal city codes
-
-    Raises:
-        ToolError: When service unavailable or invalid city codes
+            - private_line_delay: Latency in ms (e.g., '120ms')
+            - public_network_delay: Latency in ms (e.g., '150ms')
+            - from_city/to_city: Source and destination city
     """
-    # Validate city code format (3 English letters)
     if not re.match(r'^[A-Za-z]{3}$', from_city) or not re.match(r'^[A-Za-z]{3}$', to_city):
-        raise ToolError(f"Invalid city code, use the appropriate tool to look up and return the correct city code for the given city name.")
-    if from_city==to_city:
-        raise ToolError('You have provided one city. Please specify another city to measure network latency between them.')
+        raise ToolError(
+            f"Invalid city code, use the appropriate tool to look up and return the correct city code for the given city name.")
+    if from_city == to_city:
+        raise ToolError(
+            'You have provided one city. Please specify another city to measure network latency between them.')
 
     try:
         url = f"http://localhost:8000/looking-glass/city/delay?from_city={from_city}&to_city={to_city}"
@@ -73,7 +61,7 @@ def get_city_delay(
         )
         return result
 
-    except httpx.HTTPStatusError as e:
+    except httpx.HTTPError as e:
         code = e.response.status_code
         if code == 404:
             raise ToolError(f"Route not found between '{from_city}' and '{to_city}'.")
@@ -288,9 +276,6 @@ def execute_router_explore(explore_type: Literal['ping', 'mtr', 'bgp'], datacent
     Note:
         Display the result field as terminal command output in code block format.
         Do not process or interpret the result content - show it exactly as returned.
-            
-    Raises:
-        ToolError: When service unavailable or invalid parameters
     """
     try:
         url = f"http://localhost:8000/looking-glass/router/explore?datacenter={datacenter}&explore_type={explore_type}&target_ip_or_domain={target_ip_or_domain}"
@@ -358,7 +343,8 @@ def get_zenlayer_internal_city_code(city_name_en: str) -> CityResult:
         res_json = response.json()
         slog.info(f"[get city code] result for {city_name_en}: {res_json}")
         if not res_json:
-            raise ToolError("Sorry, the city you queried could not be found. Please check if the city name is correct, or the region may not be covered by a Zenlayer POP node.")
+            raise ToolError(
+                "The city you queried could not be found. Please check if the city name is correct, or the region may not be covered by a Zenlayer POP node.")
 
         return CityResult(city_code_on_zenlayer=res_json["city_code"],
                           city_name=res_json["city_name"],
