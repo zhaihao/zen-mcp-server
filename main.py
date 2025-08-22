@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
+
+import uvicorn
 from fastmcp import FastMCP
 from src.looking_glass import lg_mcp
 from src.utils import slog
@@ -21,4 +23,11 @@ slog.info("setup mcp server...")
 
 if __name__ == '__main__':
     slog.info("Starting MCP server with detailed logging...")
-    mcp.run(transport='http', host='0.0.0.0', port=3100, log_level="debug")
+    uvicorn.run(
+        'mcp.app',
+        host='0.0.0.0',
+        port=3100,
+        workers=4,
+        log_level="info"
+    )
+
