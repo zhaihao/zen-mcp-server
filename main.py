@@ -23,11 +23,5 @@ slog.info("setup mcp server...")
 
 if __name__ == '__main__':
     slog.info("Starting MCP server with detailed logging...")
-    uvicorn.run(
-        'mcp.app',
-        host='0.0.0.0',
-        port=3100,
-        workers=4,
-        log_level="info"
-    )
+    mcp.run(transport='http', host='0.0.0.0', port=3100, log_level="debug")
 
